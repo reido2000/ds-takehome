@@ -24,7 +24,7 @@
 | SHAP top-10 fitur                                |      `B_modeling.ipynb`      |
 | Slide keputusan untuk pengajuan IDR 5 juta       |     `decision_slide.pdf`     |
 
-## Bagian C – R Statistical Check (15 poin | ± 1 jam)
+## Bagian C – R Statistical Check
 
 **Tujuan:** Validasi dan kalibrasi model dengan pendekatan statistik.
 
