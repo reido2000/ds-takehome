@@ -1,0 +1,1 @@
+Terdapat nilai negatif pada decoy noise dan decoy noise tidak selalu bergantung pada kolom lain seperti payment value ataupun decoy flag
