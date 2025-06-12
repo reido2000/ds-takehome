@@ -1,3 +1,10 @@
+-- Anomaly Check
+SELECT *
+FROM ecommerce_transactions
+ORDER BY decoy_noise
+LIMIT 100
+;
+
 -- Step 1: Hitung RFM Score
 WITH rfm_raw AS (
   SELECT
@@ -37,7 +44,7 @@ rfm_segmented AS (
 SELECT * FROM rfm_segmented
 ;
 
--- Step 4: Repeat Purchase
+-- Step 4: Repeat Purchase Bulanan
 WITH monthly_orders AS (
   SELECT
     customer_id,
@@ -45,13 +52,12 @@ WITH monthly_orders AS (
     COUNT(order_id) AS orders_in_month
   FROM ecommerce_transactions
   GROUP BY customer_id, order_month
-  ORDER BY order_month
-),
-
-repeat_customers AS (
-  SELECT order_month, COUNT(*) AS repeat_count
-  FROM monthly_orders
-  WHERE orders_in_month > 1
-  GROUP BY order_month
 )
-SELECT * FROM repeat_customers;
+SELECT
+  customer_id,
+  order_month,
+  orders_in_month
+FROM monthly_orders
+WHERE orders_in_month > 1
+ORDER BY order_month, customer_id
+;
