@@ -37,3 +37,21 @@ rfm_segmented AS (
 SELECT * FROM rfm_segmented
 ;
 
+-- Step 4: Repeat Purchase
+WITH monthly_orders AS (
+  SELECT
+    customer_id,
+    DATE_TRUNC('month', order_date) AS order_month,
+    COUNT(order_id) AS orders_in_month
+  FROM ecommerce_transactions
+  GROUP BY customer_id, order_month
+  ORDER BY order_month
+),
+
+repeat_customers AS (
+  SELECT order_month, COUNT(*) AS repeat_count
+  FROM monthly_orders
+  WHERE orders_in_month > 1
+  GROUP BY order_month
+)
+SELECT * FROM repeat_customers;
